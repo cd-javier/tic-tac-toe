@@ -1,0 +1,53 @@
+# TIC-TAC-TOE
+
+Project for The Odin Project's Javascript course inside of the Full Stack React course.
+The goal is to create the classic TIC TAC TOE game using HTML, CSS, and JavaScript.
+
+Following best practices, the logic of the game should be created entirely before adding a UI.
+The script file should avoid at all costs having any global variables.
+
+## Pseudocode
+
+    Function GameBoard
+        A variable for the number of rows (3)
+        A variable for the number of cells (3)
+        Empty array for the game board.
+        
+        For loop that runs the value of rows.
+            An empty array for each position in the board.
+            For loop that runs the number of columns.
+                Each time it pushes a cell inside of the row.
+
+        Function getBoard that returns the game board.
+        Function printBoard that logs the board in the console.
+
+        Function Cell
+            Variable value = 0
+            Variable X
+            Variable Y
+            Function markCell that changes the value of the cell ONLY if it's different than 0 (hasn't been played)
+            RETURN OBJ:
+                X
+                Y
+                Value
+                markCell
+
+        Function placeToken
+            Takes three parameters: X, Y, player
+            Runs Cell.cell on the board.
+
+        RETURN OBJ:
+            getBoard
+            placeToken
+            printBoard
+
+    Function Players
+        Array with two players
+            Each player is an object (constructor)
+            Symbol is 1 and 2
+
+        Function switch players
+
+        RETURN:
+            Active player
+            Switch player
