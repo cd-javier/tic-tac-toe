@@ -18,7 +18,7 @@ function GameBoard() {
   // Prints a table that shows the value of each cell
   const printBoard = () => {
     const showedBoard = board.map((row) => row.map((cell) => cell.getValue()));
-    console.table(showedBoard)
+    console.table(showedBoard);
   };
 
   // To avoid tempering with the content of the board through the console
@@ -39,10 +39,12 @@ function GameBoard() {
     return { x, y, getValue, markCell };
   }
 
-  // Marks the specified cell
+  // Marks the specified cell only if it hasn't been filled before.
   function placeToken(x, y, player) {
     targetCell = board[x][y];
-    targetCell.markCell(player);
+    if (targetCell.getValue() === 0) {
+      targetCell.markCell(player);
+    }
   }
 
   return { getBoard, printBoard, placeToken };
