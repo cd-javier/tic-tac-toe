@@ -184,8 +184,9 @@ function GameFlow() {
   const Queries = (function () {
     const board = document.getElementById("board");
     const display = document.getElementById("display");
+    const resetBtn = document.getElementById("reset-btn");
 
-    return { board, display };
+    return { board, display, resetBtn };
   })();
 
   // Renders the board on the DOM
@@ -226,18 +227,27 @@ function GameFlow() {
   // IIFE that contains all event listeners
   (function EventListeners() {
     Queries.board.addEventListener("click", markSquare);
+    Queries.resetBtn.addEventListener("click", resetGame);
   })();
 
+  // When the board is clicked, if the click is done on a cell,
+  // the playRound function is called with the values X and Y of that cell
   function markSquare(e) {
     targetSquare = e.target;
-
     if (targetSquare.classList.contains("cell")) {
       game.playRound(targetSquare.dataset.x, targetSquare.dataset.y);
       render();
     }
   }
 
+  // When the reset button is clicked, a new game is started by reassigning
+  // the value of the variable game and rendering again.
+  function resetGame() {
+    game = GameFlow();
+    render();
+  }
+
   // Initialize game
-  const game = GameFlow();
+  let game = GameFlow();
   render();
 })();
