@@ -1,10 +1,30 @@
+@import url(./modern-normalize.css);
+
+:root {
+  --background-neutral: ;
+  --neutral: ;
+  --dark: ;
+  --black: ;
+  --p1-image: url("./img/eggplant.png");
+  --p2-image: url("./img/peach.png");
+}
+
+body {
+    height: 100vh;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .wrapper {
-  width: min(100vh, 100vw);
-  height: min(100vh, 100vw);
+  width: min(90vh, 90vw);
+  /* height: min(100vh, 100vw); */
 
   display: grid;
   grid-template-areas: "p1 p2" "display display" "board board";
-  grid-template-rows: min-content min-content 1fr;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .player {
@@ -14,15 +34,16 @@
 .board {
   grid-area: board;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, min-content);
+  grid-template-rows: repeat(3, min-content);
+  gap: 0.5rem;
 }
 
 .cell {
   border: 1px solid #000;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: calc(calc(min(90vh, 90vw) / 3) - 1rem);
+  height: calc(calc(min(90vh, 90vw) / 3) - 1rem);
 }
 
 .display {
@@ -30,10 +51,17 @@
   border: 1px solid #000;
 }
 
+.p1,
+.p2 {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
 .p1 {
-  background-color: red;
+  background-image: var(--p1-image);
 }
 
 .p2 {
-  background-color: blue;
+  background-image: var(--p2-image);
 }
