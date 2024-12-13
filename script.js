@@ -49,3 +49,34 @@ function GameBoard() {
 
   return { getBoard, printBoard, placeToken };
 }
+
+function Players(playerOneName = "Player One", playerTwoName = "Player Two") {
+  // Factory function to create the players. In case methods are needed in the future
+  function createPlayer(name, symbol) {
+    const player = {
+      name,
+      symbol,
+    };
+    return player;
+  }
+
+  // Players are stored in an array
+  const players = [
+    createPlayer(playerOneName, 1),
+    createPlayer(playerTwoName, 2),
+  ];
+
+  let activePlayer = players[0];
+
+  // To avoid tempering with the active player through the console
+  const getActivePlayer = () => activePlayer;
+
+  function switchPlayer() {
+    activePlayer === players[0]
+      ? (activePlayer = players[1])
+      : (activePlayer = players[0]);
+  }
+
+  return {getActivePlayer, switchPlayer}
+}
+
