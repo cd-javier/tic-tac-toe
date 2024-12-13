@@ -203,7 +203,12 @@ function GameFlow() {
         newCell.classList.add("cell");
         newCell.dataset.x = cell.x;
         newCell.dataset.y = cell.y;
-        newCell.textContent = symbol;
+
+        if (symbol === 1) {
+          newCell.classList.add("p1");
+        } else if (symbol === 2) {
+          newCell.classList.add("p2");
+        }
 
         Queries.board.appendChild(newCell);
       });
