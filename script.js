@@ -140,10 +140,10 @@ function GameFlow() {
   function playRound(x, y) {
     const activePlayer = players.getActivePlayer();
 
-    // Only allows to play empty cells
-    if (board.getBoard()[x][y].getValue() === 0) {
-      // Only works if there's no winner yet and the board isn't full.
-      if (!board.checkFull() && !board.checkWinner()) {
+    // Only works if there's no winner yet and the board isn't full.
+    if (!board.checkFull() && !board.checkWinner()) {
+      // Only allows to play empty cells
+      if (board.getBoard()[x][y].getValue() === 0) {
         // Places active player's token on the target cell
         board.placeToken(x, y, activePlayer.symbol);
 
@@ -161,9 +161,9 @@ function GameFlow() {
           players.switchPlayer();
           displayMessage = announcePlayer();
         }
+      } else {
+        displayMessage = "Nice try, you can't play the same square twice!";
       }
-    } else {
-      displayMessage = "That cell has been marked already, try again!";
     }
   }
 
