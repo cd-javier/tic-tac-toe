@@ -42,9 +42,7 @@ function GameBoard() {
   // Marks the specified cell only if it hasn't been filled before.
   function placeToken(x, y, player) {
     targetCell = board[x][y];
-    if (targetCell.getValue() === 0) {
-      targetCell.markCell(player);
-    }
+    targetCell.markCell(player);
   }
 
   // Checks if the board is full and returns a boolean
@@ -58,7 +56,7 @@ function GameBoard() {
   }
 
   // Checks if three cells in a row have the same value other than 0 and returns a boolean
-  function checkWinner(x, y) {
+  function checkWinner() {
     const cellValue = (x, y) => board[x][y].getValue();
     if (
       (cellValue(0, 0) === cellValue(0, 1) &&
@@ -138,28 +136,32 @@ function GameFlow() {
   function play(x, y) {
     const activePlayer = players.getActivePlayer();
 
-    if (!board.checkFull() && !board.checkWinner()) {
+    // Only allows to play empty cells
+    if (board.getBoard()[x][y].getValue() === 0) {
       // Only works if there's no winner yet and the board isn't full.
+      if (!board.checkFull() && !board.checkWinner()) {
+        // Places active player's token on the target cell
+        board.placeToken(x, y, activePlayer.symbol);
 
-      // Places active player's token on the target cell
-      board.placeToken(x, y, activePlayer.symbol);
+        // Prints the board
+        board.printBoard();
 
-      // Prints the board
-      board.printBoard();
-
-      if (board.checkWinner()) {
-        // If there is a winner it announces the winner
-        console.log(`The game is over! ${activePlayer.name} wins the game!`);
-      } else if (board.checkFull()) {
-        // If the board is full, the game is over and no one wins
-        console.log("It's a tie, the board is full!");
+        if (board.checkWinner()) {
+          // If there is a winner it announces the winner
+          console.log(`The game is over! ${activePlayer.name} wins the game!`);
+        } else if (board.checkFull()) {
+          // If the board is full, the game is over and no one wins
+          console.log("It's a tie, the board is full!");
+        } else {
+          // Otherwise it switches the active player and lets them know it's their turn
+          players.switchPlayer();
+          announcePlayer();
+        }
       } else {
-        // Otherwise it switches the active player and lets them know it's their turn
-        players.switchPlayer();
-        announcePlayer();
+        console.log("Sorry girl, the game is over.");
       }
     } else {
-      console.log("Sorry girl, the game is over.");
+      console.log("That cell has been marked already, try again!");
     }
   }
 
