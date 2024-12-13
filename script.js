@@ -17,8 +17,8 @@ function GameBoard() {
 
   // Prints a table that shows the value of each cell
   const printBoard = () => {
-    const showedBoard = board.map((row) => row.map((cell) => cell.getValue()));
-    console.table(showedBoard);
+    const boardValues = board.map((row) => row.map((cell) => cell.getValue()));
+    console.table(boardValues);
   };
 
   // To avoid tempering with the content of the board through the console
@@ -58,8 +58,38 @@ function GameBoard() {
   }
 
   // Checks if three cells in a row have the same value other than 0 and returns a boolean
-  function checkWinner() {
-    return false;
+  function checkWinner(x, y) {
+    const cellValue = (x, y) => board[x][y].getValue();
+    if (
+      (cellValue(0, 0) === cellValue(0, 1) &&
+        cellValue(0, 1) === cellValue(0, 2) &&
+        cellValue(0, 2) !== 0) ||
+      (cellValue(1, 0) === cellValue(1, 1) &&
+        cellValue(1, 1) === cellValue(1, 2) &&
+        cellValue(1, 2) !== 0) ||
+      (cellValue(2, 0) === cellValue(2, 1) &&
+        cellValue(2, 1) === cellValue(2, 2) &&
+        cellValue(2, 2) !== 0) ||
+      (cellValue(0, 0) === cellValue(1, 0) &&
+        cellValue(1, 0) === cellValue(2, 0) &&
+        cellValue(2, 0) !== 0) ||
+      (cellValue(0, 1) === cellValue(1, 1) &&
+        cellValue(1, 1) === cellValue(2, 1) &&
+        cellValue(2, 1) !== 0) ||
+      (cellValue(0, 2) === cellValue(1, 2) &&
+        cellValue(1, 2) === cellValue(2, 2) &&
+        cellValue(2, 2) !== 0) ||
+      (cellValue(0, 0) === cellValue(1, 1) &&
+        cellValue(1, 1) === cellValue(2, 2) &&
+        cellValue(2, 2) !== 0) ||
+      (cellValue(2, 0) === cellValue(1, 1) &&
+        cellValue(1, 1) === cellValue(0, 2) &&
+        cellValue(0, 2) !== 0)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   return { getBoard, printBoard, placeToken, checkFull, checkWinner };
@@ -143,14 +173,3 @@ function GameFlow() {
 }
 
 const game = GameFlow();
-
-game(0, 0);
-game(0, 1);
-game(0, 2);
-game(1, 0);
-game(1, 1);
-game(1, 2);
-game(2, 0);
-game(2, 1);
-game(2, 2);
-game(2, 2);
