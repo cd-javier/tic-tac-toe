@@ -111,19 +111,42 @@ body {
   background-size: 50%;
 }
 
-.p1 {
+
+.btn {
+    appearance: none;
+    border: none;
+    background-color: var(--accent);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.p1,
+.p1-hover:before {
   background-image: var(--p1-image);
 }
 
-.p2 {
+.p2,
+.p2-hover:before {
   background-image: var(--p2-image);
 }
 
-.btn {
-  appearance: none;
-  border: none;
-  background-color: var(--accent);
-  color: white;
-  padding: 0.5rem;
-  border-radius: 4px;
+.p1-hover,
+.p2-hover {
+    position: relative;
+}
+.p1-hover:before,
+.p2-hover:before {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    opacity: 0.3;
 }
