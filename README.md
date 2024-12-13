@@ -41,13 +41,44 @@ The script file should avoid at all costs having any global variables.
             placeToken
             printBoard
 
+
     Function Players
         Array with two players
             Each player is an object (constructor)
             Symbol is 1 and 2
 
+        Variable activePlayer, is player one
+
         Function switch players
+            If activePlayer is player 1, then it reassigns activePlayer to player 2
 
         RETURN:
             Active player
             Switch player
+
+
+    Function GameFlow
+        Variable board is GameBoard
+        Variable players is Players
+
+        Function announcePlayer
+            Logs on the console which player's turn it is.
+
+        Function play
+            Takes two variables, x and y
+            Places a token on the board on x and y coordinates with the active player's symbol
+            Prints the board.
+            Announces
+
+        Anonymous IIFE
+            Starts the game by printing the board and announcing which player's turn it is.
+
+        RETURN
+            play
+
+
+    IIFE UI
+
+
+
+    Varibale game is GameFlow

@@ -77,6 +77,30 @@ function Players(playerOneName = "Player One", playerTwoName = "Player Two") {
       : (activePlayer = players[0]);
   }
 
-  return {getActivePlayer, switchPlayer}
+  return { getActivePlayer, switchPlayer };
 }
 
+function GameFlow() {
+  const board = GameBoard();
+  const players = Players();
+
+  function announcePlayer() {
+    console.log(`It's ${players.getActivePlayer().name}'s turn.`);
+  }
+
+  function play(x, y) {
+    board.placeToken(x, y, players.getActivePlayer().symbol);
+    board.printBoard();
+    players.switchPlayer();
+    announcePlayer();
+  }
+
+  (function () {
+    board.printBoard();
+    announcePlayer();
+  })()
+
+  return play;
+}
+
+const game = GameFlow();
