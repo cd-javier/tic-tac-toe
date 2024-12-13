@@ -1,15 +1,31 @@
-.board {
-    width: min(80vh, 80vw);
-    height: min(80vh, 80vw);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.wrapper {
+  width: min(100vh, 100vw);
+  height: min(100vh, 100vw);
 
+  display: grid;
+  grid-template-areas: "p1 p2" "display display" "board board";
+  grid-template-rows: min-content min-content 1fr;
+}
+
+.player {
+  border: 1px solid #000;
+}
+
+.board {
+    grid-area: board;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .cell {
-    border: 1px solid #000;
+  border: 1px solid #000;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display {
+    grid-area: display;
+  border: 1px solid #000;
 }

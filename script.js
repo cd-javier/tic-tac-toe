@@ -129,8 +129,12 @@ function GameFlow() {
 
   // Logs on the console who's turn it is
   function announcePlayer() {
-    console.log(`It's ${players.getActivePlayer().name}'s turn.`);
+    return `It's ${players.getActivePlayer().name}'s turn.`;
   }
+
+  let displayMessage = announcePlayer();
+
+  const getDisplayMessage = () => displayMessage;
 
   // The only way the user interacts with the game
   function playRound(x, y) {
@@ -148,20 +152,18 @@ function GameFlow() {
 
         if (board.checkWinner()) {
           // If there is a winner it announces the winner
-          console.log(`The game is over! ${activePlayer.name} wins the game!`);
+          displayMessage = `The game is over! ${activePlayer.name} wins the game!`;
         } else if (board.checkFull()) {
           // If the board is full, the game is over and no one wins
-          console.log("It's a tie, the board is full!");
+          displayMessage = "It's a tie, the board is full!";
         } else {
           // Otherwise it switches the active player and lets them know it's their turn
           players.switchPlayer();
-          announcePlayer();
+          displayMessage = announcePlayer();
         }
-      } else {
-        console.log("Sorry girl, the game is over.");
       }
     } else {
-      console.log("That cell has been marked already, try again!");
+      displayMessage = "That cell has been marked already, try again!";
     }
   }
 
@@ -174,15 +176,16 @@ function GameFlow() {
     announcePlayer();
   })();
 
-  return { playRound, getBoard };
+  return { playRound, getBoard, getDisplayMessage };
 }
 
 (function UI() {
   // Creates an object with all the needed query selectors
   const Queries = (function () {
     const board = document.getElementById("board");
+    const display = document.getElementById("display");
 
-    return { board };
+    return { board, display };
   })();
 
   // Renders the board on the DOM
@@ -206,6 +209,15 @@ function GameFlow() {
       });
   }
 
+  function renderDisplay() {
+    Queries.display.textContent = game.getDisplayMessage();
+  }
+
+  function render() {
+    renderBoard();
+    renderDisplay();
+  }
+
   // IIFE that contains all event listeners
   (function EventListeners() {
     Queries.board.addEventListener("click", markSquare);
@@ -216,11 +228,11 @@ function GameFlow() {
 
     if (targetSquare.classList.contains("cell")) {
       game.playRound(targetSquare.dataset.x, targetSquare.dataset.y);
-      renderBoard();
+      render();
     }
   }
 
   // Initialize game
   const game = GameFlow();
-  renderBoard();
+  render();
 })();
