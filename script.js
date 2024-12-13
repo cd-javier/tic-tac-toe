@@ -47,7 +47,22 @@ function GameBoard() {
     }
   }
 
-  return { getBoard, printBoard, placeToken };
+  // Checks if the board is full and returns a boolean
+  function checkFull() {
+    const availableCells = board.flat().filter((cell) => cell.getValue() === 0);
+    if (availableCells.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // Checks if three cells in a row have the same value other than 0 and returns a boolean
+  function checkWinner() {
+    return false;
+  }
+
+  return { getBoard, printBoard, placeToken, checkFull, checkWinner };
 }
 
 function Players(playerOneName = "Player One", playerTwoName = "Player Two") {
@@ -84,23 +99,58 @@ function GameFlow() {
   const board = GameBoard();
   const players = Players();
 
+  // Logs on the console who's turn it is
   function announcePlayer() {
     console.log(`It's ${players.getActivePlayer().name}'s turn.`);
   }
 
+  // The only way the user interacts with the game
   function play(x, y) {
-    board.placeToken(x, y, players.getActivePlayer().symbol);
-    board.printBoard();
-    players.switchPlayer();
-    announcePlayer();
+    const activePlayer = players.getActivePlayer();
+
+    if (!board.checkFull() && !board.checkWinner()) {
+      // Only works if there's no winner yet and the board isn't full.
+
+      // Places active player's token on the target cell
+      board.placeToken(x, y, activePlayer.symbol);
+
+      // Prints the board
+      board.printBoard();
+
+      if (board.checkWinner()) {
+        // If there is a winner it announces the winner
+        console.log(`The game is over! ${activePlayer.name} wins the game!`);
+      } else if (board.checkFull()) {
+        // If the board is full, the game is over and no one wins
+        console.log("It's a tie, the board is full!");
+      } else {
+        // Otherwise it switches the active player and lets them know it's their turn
+        players.switchPlayer();
+        announcePlayer();
+      }
+    } else {
+      console.log("Sorry girl, the game is over.");
+    }
   }
 
+  // Starts the game by showing the empty board and announcing whose turn it is
   (function () {
     board.printBoard();
     announcePlayer();
-  })()
+  })();
 
   return play;
 }
 
 const game = GameFlow();
+
+game(0, 0);
+game(0, 1);
+game(0, 2);
+game(1, 0);
+game(1, 1);
+game(1, 2);
+game(2, 0);
+game(2, 1);
+game(2, 2);
+game(2, 2);

@@ -36,10 +36,21 @@ The script file should avoid at all costs having any global variables.
             Takes three parameters: X, Y, player
             Runs Cell.cell on the board.
 
+        Function checkFull
+            Variable available cells.
+                Flattens the array and returns a new array with only the cells which value is 0
+            If the length of the available cells is greater than 0
+                Returns true
+                Otherwise returns false
+
+        Function checkWinner
+            A series or if statements that checks if there are three cells in a row with the same value (other than 0)
+
         RETURN OBJ:
             getBoard
             placeToken
             printBoard
+            checkFull
 
 
     Function Players
@@ -52,7 +63,7 @@ The script file should avoid at all costs having any global variables.
         Function switch players
             If activePlayer is player 1, then it reassigns activePlayer to player 2
 
-        RETURN:
+        RETURN OBJ:
             Active player
             Switch player
 
@@ -66,9 +77,16 @@ The script file should avoid at all costs having any global variables.
 
         Function play
             Takes two variables, x and y
-            Places a token on the board on x and y coordinates with the active player's symbol
-            Prints the board.
-            Announces
+            If there is no winner and the board isn't full
+                Places a token on the board on x and y coordinates with the active player's symbol.
+                Prints the board
+                If boards' check winner is true
+                    Announce the active player is the winner.
+                Else if the board is full
+                    Announce there's no winner and the game is over
+                Else
+                    Switches active player
+                    Announces player's turn.
 
         Anonymous IIFE
             Starts the game by printing the board and announcing which player's turn it is.
