@@ -26,7 +26,7 @@ body {
 
   display: grid;
   grid-template-areas: "heading heading" "p1 p2" "display display" "board board";
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .heading,
@@ -94,18 +94,13 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 0.5rem;
+  gap: 0.25rem;
 
   background-color: var(--accent);
   overflow: hidden;
 
   width: calc(100vw - 2rem);
   height: calc(100vw - 2rem);
-}
-
-.cell {
-  /* width: calc(calc(min(90vh, 90vw) / 3) - 1rem);
-  height: calc(calc(min(90vh, 90vw) / 3) - 1rem); */
 }
 
 .display {
