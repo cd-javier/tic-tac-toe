@@ -129,7 +129,7 @@ function GameFlow() {
 
   // Logs on the console who's turn it is
   function announcePlayer() {
-    return `It's ${players.getActivePlayer().name}'s turn.`;
+    return `${players.getActivePlayer().name}'s turn`;
   }
 
   let displayMessage = announcePlayer();
@@ -152,7 +152,7 @@ function GameFlow() {
 
         if (board.checkWinner()) {
           // If there is a winner it announces the winner
-          displayMessage = `The game is over! ${activePlayer.name} wins the game!`;
+          displayMessage = `${activePlayer.name} wins!`;
         } else if (board.checkFull()) {
           // If the board is full, the game is over and no one wins
           displayMessage = "It's a tie, the board is full!";
@@ -162,7 +162,7 @@ function GameFlow() {
           displayMessage = announcePlayer();
         }
       } else {
-        displayMessage = "Nice try, you can't play the same square twice!";
+        displayMessage = "Nice try!";
       }
     }
   }
