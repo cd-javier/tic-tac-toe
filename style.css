@@ -1,0 +1,15 @@
+.board {
+    width: min(80vh, 80vw);
+    height: min(80vh, 80vw);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+.cell {
+    border: 1px solid #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

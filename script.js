@@ -133,7 +133,7 @@ function GameFlow() {
   }
 
   // The only way the user interacts with the game
-  function play(x, y) {
+  function playRound(x, y) {
     const activePlayer = players.getActivePlayer();
 
     // Only allows to play empty cells
@@ -165,13 +165,43 @@ function GameFlow() {
     }
   }
 
+  // Get the live board. Used for the UI
+  const getBoard = () => board.getBoard();
+
   // Starts the game by showing the empty board and announcing whose turn it is
   (function () {
     board.printBoard();
     announcePlayer();
   })();
 
-  return play;
+  return { playRound, getBoard };
 }
 
-const game = GameFlow();
+(function UI() {
+  // Creates an object with all the needed query selectors
+  const Queries = (function () {
+    const board = document.getElementById("board");
+
+    return { board };
+  })();
+
+  // Renders the board on the DOM
+  function renderBoard() {
+    game
+      .getBoard()
+      .flat()
+      .forEach((cell) => {
+        const newCell = document.createElement("div");
+        const symbol = cell.getValue();
+        newCell.classList.add("cell");
+        newCell.dataset.x = cell.x;
+        newCell.dataset.y = cell.y;
+        newCell.textContent = symbol;
+
+        Queries.board.appendChild(newCell);
+      });
+  }
+
+  const game = GameFlow();
+  renderBoard();
+})();

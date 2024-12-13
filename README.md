@@ -96,7 +96,14 @@ The script file should avoid at all costs having any global variables.
 
 
     IIFE UI
+        IIFE Queries
+            Returns all the needed queries
+        
+        Function render board
+            Selects the board on the DOM and prints the cells.
+            If the value of the cell is 1 it uses symbol X
+            If the value of the cell is 2 it uses symbol O
 
 
 
-    Varibale game is GameFlow
+    Variable game is GameFlow
