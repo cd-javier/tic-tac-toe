@@ -187,6 +187,10 @@ function GameFlow() {
 
   // Renders the board on the DOM
   function renderBoard() {
+    // Empties the board
+    Queries.board.innerHTML = "";
+
+    // Refills the board
     game
       .getBoard()
       .flat()
@@ -202,6 +206,21 @@ function GameFlow() {
       });
   }
 
+  // IIFE that contains all event listeners
+  (function EventListeners() {
+    Queries.board.addEventListener("click", markSquare);
+  })();
+
+  function markSquare(e) {
+    targetSquare = e.target;
+
+    if (targetSquare.classList.contains("cell")) {
+      game.playRound(targetSquare.dataset.x, targetSquare.dataset.y);
+      renderBoard();
+    }
+  }
+
+  // Initialize game
   const game = GameFlow();
   renderBoard();
 })();

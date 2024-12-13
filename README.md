@@ -104,6 +104,5 @@ The script file should avoid at all costs having any global variables.
             If the value of the cell is 1 it uses symbol X
             If the value of the cell is 2 it uses symbol O
 
-
-
-    Variable game is GameFlow
+        Variable game is GameFlow
+        Render board
