@@ -1,10 +1,12 @@
 @import url(./modern-normalize.css);
 
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 :root {
-  --background-neutral: #faf9f6;
-  --accent: #5f9ea0;
-  --black: #222b2b;
-  --shadow: #0000001a 0px 4px 8px;
+  --background-neutral: #514055;
+  --accent: #8040bf;
+  --text-color: #f3f1f5;
+  --element-bg: #342a3a;
   --p1-image: url("./img/eggplant.png");
   --p2-image: url("./img/peach.png");
 }
@@ -14,11 +16,15 @@ body {
   height: 100svh;
 
   background-color: var(--background-neutral);
-  color: var(--black);
+  color: var(--text-color);
+  font-family: "DM Sans", sans-serif;
+  font-weight: normal;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  color: var(--text-color);
 }
 
 .wrapper {
@@ -42,7 +48,7 @@ body {
 .player,
 .display,
 .cell {
-  background-color: white;
+  background-color: var(--element-bg);
 }
 
 .heading,
@@ -50,19 +56,19 @@ body {
 .display,
 .board {
   border-radius: 4px;
-  box-shadow: var(--shadow);
 }
 
 .heading {
   grid-area: heading;
 
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 400;
 }
+
 .heading h1 {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .player {
@@ -86,6 +92,7 @@ body {
 
 .display span {
   flex: 1;
+  font-weight: 200;
   font-style: italic;
 }
 
@@ -111,10 +118,6 @@ body {
   padding-bottom: 100%;
 }
 
-.display {
-  grid-area: display;
-}
-
 .p1,
 .p2 {
   background-repeat: no-repeat;
@@ -126,7 +129,7 @@ body {
   appearance: none;
   border: none;
   background-color: var(--accent);
-  color: white;
+  color: var(--text-color);
   padding: 0.5rem;
   border-radius: 4px;
 }
